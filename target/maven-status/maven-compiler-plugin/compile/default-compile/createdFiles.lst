@@ -1,0 +1,11 @@
+com\boyu\farmsharing\Controller\ImageController.class
+com\boyu\farmsharing\FarmSharingApplication.class
+com\boyu\farmsharing\Constant\ImageConstant.class
+com\boyu\farmsharing\common\BaseResponse.class
+com\boyu\farmsharing\service\impl\ImageServiceImpl.class
+com\boyu\farmsharing\model\domain\Image.class
+com\boyu\farmsharing\common\ErrorCode.class
+com\boyu\farmsharing\service\ImageService.class
+com\boyu\farmsharing\Util\ImageUtil.class
+com\boyu\farmsharing\common\ResultUtils.class
+com\boyu\farmsharing\model\request\ImageRandomRequest.class
