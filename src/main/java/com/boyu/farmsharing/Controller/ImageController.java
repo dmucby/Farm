@@ -25,6 +25,12 @@ public class ImageController {
     @Resource
     ImageService imageService;
 
+    @PostMapping("/test")
+    public String Test(@RequestBody ImageRandomRequest imageRandomRequest){
+        return imageRandomRequest.getImageString();
+    }
+
+
     @PostMapping("/random")
     public BaseResponse<List<Image>> Random(@RequestBody ImageRandomRequest imageRandomRequest){
         if (imageRandomRequest == null) {
