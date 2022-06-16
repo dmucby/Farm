@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.boyu.farmsharing.mapper.FarmPostMapper">
+
+    <resultMap id="BaseResultMap" type="com.boyu.farmsharing.model.domain.Farmpost">
+            <id property="postID" column="PostID" jdbcType="INTEGER"/>
+            <result property="postTitle" column="PostTitle" jdbcType="VARCHAR"/>
+            <result property="postContent" column="PostContent" jdbcType="VARCHAR"/>
+            <result property="postPicture" column="PostPicture" jdbcType="VARCHAR"/>
+            <result property="createDate" column="CreateDate" jdbcType="TIMESTAMP"/>
+            <result property="userID" column="UserID" jdbcType="INTEGER"/>
+            <result property="userName" column="UserName" jdbcType="VARCHAR"/>
+            <result property="postReading" column="PostReading" jdbcType="INTEGER"/>
+            <result property="postLove" column="PostLove" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        PostID,PostTitle,PostContent,
+        PostPicture,CreateDate,UserID,
+        UserName,PostReading,PostLove
+    </sql>
+</mapper>

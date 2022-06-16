@@ -1,2 +1,3 @@
 com\boyu\farmsharing\FarmSharingApplicationTests.class
+com\boyu\farmsharing\service\impl\FarmpostServiceImplTest.class
 com\boyu\farmsharing\service\impl\ImageServiceImplTest.class

@@ -2,11 +2,13 @@ package com.boyu.farmsharing.model.request;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
-public class ImageRandomRequest {
+public class ImageRandomRequest implements Serializable {
 
     private static final long serialVersionUID = 1231425435457575674L;
 
-  private String imageString;
+    private String imageString;
 
 }

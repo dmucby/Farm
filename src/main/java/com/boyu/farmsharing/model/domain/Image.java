@@ -2,11 +2,13 @@ package com.boyu.farmsharing.model.domain;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * 图像
  */
 @Data
-public class Image {
+public class Image implements Serializable {
 
     /**
      * 图像长
