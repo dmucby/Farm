@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.boyu.farmsharing.common.BaseResponse;
 import com.boyu.farmsharing.common.ResultUtils;
 import com.boyu.farmsharing.model.domain.Farmpost;
+import com.boyu.farmsharing.model.request.UserPostGetList;
 import com.boyu.farmsharing.model.request.UserPostGetRequest;
 import com.boyu.farmsharing.model.request.UserPostRequest;
 import com.boyu.farmsharing.service.FarmpostService;
@@ -97,8 +98,32 @@ public class PostController {
     public BaseResponse userGetListLove(){
         QueryWrapper wrapper = new QueryWrapper();
         wrapper.orderByDesc("PostLove");
-        wrapper.last("limit 10");
+        wrapper.last("limit 30");
         List<Farmpost> farmpostList = farmpostService.list(wrapper);
         return ResultUtils.success(farmpostList);
     }
+
+    @PostMapping("order")
+    public BaseResponse userGetPostList(@RequestBody UserPostGetList request ){
+        if (request == null){
+            return ResultUtils.error(PARAMS_ERROR, "参数为空！");
+        }
+
+        Integer pageNumber = request.getPageNumber();
+        Integer pageNums = request.getPageNums();
+        String matchField = request.getMatchField();
+
+        if(pageNumber == 0 || pageNums == 0){
+            return ResultUtils.error(PARAMS_ERROR, "请正确书写请求参数");
+        }
+
+        if(StringUtils.isAnyBlank(matchField)){
+            return ResultUtils.error(PARAMS_ERROR, "请正确书写请求参数");
+        }
+
+        List<Farmpost> list = farmpostService.postPage(pageNumber,pageNums,matchField);
+
+        return ResultUtils.success(list);
+    }
+
 }

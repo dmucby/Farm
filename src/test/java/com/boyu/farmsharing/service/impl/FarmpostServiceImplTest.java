@@ -3,6 +3,7 @@ package com.boyu.farmsharing.service.impl;
 import com.boyu.farmsharing.service.FarmpostService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
@@ -25,6 +26,11 @@ class FarmpostServiceImplTest {
 //        Boolean bool = farmpostService.userPost(postTitle, postContent, userName, postPicture);
 //
 //        Assertions.assertEquals(true,bool);
+//    }
+//
+//    @Test
+//    void testPostPage(){
+//        farmpostService.postPage(1,10,"CreateDate");
 //    }
 
 }

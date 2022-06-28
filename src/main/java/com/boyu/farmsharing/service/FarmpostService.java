@@ -3,6 +3,8 @@ package com.boyu.farmsharing.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.boyu.farmsharing.model.domain.Farmpost;
 
+import java.util.List;
+
 
 /**
 * @author 余悸
@@ -17,4 +19,11 @@ public interface FarmpostService extends IService<Farmpost> {
      * @param userName 文章作者
      */
     Boolean userPost(String postTitle,String postContent,String userName,String postPicture);
+
+    /**
+     * 分页返回
+     * @param pageNumber 页码
+     * @param pageNums 页面内容个数
+     */
+    List<Farmpost> postPage(Integer pageNumber, Integer pageNums,String matchField);
 }

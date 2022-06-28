@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.boyu.farmsharing.FarmSharingApplicationTests
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 6.534 s - in com.boyu.farmsharing.FarmSharingApplicationTests

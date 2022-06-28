@@ -16,3 +16,5 @@ E:\Java_file\JavaWeb\JavaEE_File\FarmSharing\src\main\java\com\boyu\farmsharing\
 E:\Java_file\JavaWeb\JavaEE_File\FarmSharing\src\main\java\com\boyu\farmsharing\mapper\FarmPostMapper.java
 E:\Java_file\JavaWeb\JavaEE_File\FarmSharing\src\main\java\com\boyu\farmsharing\model\domain\Farmpost.java
 E:\Java_file\JavaWeb\JavaEE_File\FarmSharing\src\main\java\com\boyu\farmsharing\Controller\PostController.java
+E:\Java_file\JavaWeb\JavaEE_File\FarmSharing\src\main\java\com\boyu\farmsharing\config\MybatisPlusConfig.java
+E:\Java_file\JavaWeb\JavaEE_File\FarmSharing\src\main\java\com\boyu\farmsharing\model\request\UserPostGetList.java

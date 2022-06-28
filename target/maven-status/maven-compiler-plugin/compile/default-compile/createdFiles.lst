@@ -6,8 +6,10 @@ com\boyu\farmsharing\service\impl\ImageServiceImpl.class
 com\boyu\farmsharing\model\domain\Image.class
 com\boyu\farmsharing\common\ErrorCode.class
 com\boyu\farmsharing\service\impl\FarmpostServiceImpl.class
+com\boyu\farmsharing\config\MybatisPlusConfig.class
 com\boyu\farmsharing\model\request\UserPostRequest.class
 com\boyu\farmsharing\common\BaseResponse.class
+com\boyu\farmsharing\model\request\UserPostGetList.class
 com\boyu\farmsharing\model\domain\Farmpost.class
 com\boyu\farmsharing\service\ImageService.class
 com\boyu\farmsharing\Util\ImageUtil.class
