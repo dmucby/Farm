@@ -10,7 +10,7 @@
             <result property="postContent" column="PostContent" jdbcType="VARCHAR"/>
             <result property="postPicture" column="PostPicture" jdbcType="VARCHAR"/>
             <result property="createDate" column="CreateDate" jdbcType="TIMESTAMP"/>
-            <result property="userID" column="UserID" jdbcType="INTEGER"/>
+            <result property="openId" column="UserID" jdbcType="VARCHAR"/>
             <result property="userName" column="UserName" jdbcType="VARCHAR"/>
             <result property="postReading" column="PostReading" jdbcType="INTEGER"/>
             <result property="postLove" column="PostLove" jdbcType="INTEGER"/>

@@ -6,7 +6,7 @@ import com.boyu.farmsharing.Util.ImageUtil;
 import com.boyu.farmsharing.common.BaseResponse;
 import com.boyu.farmsharing.common.ResultUtils;
 import com.boyu.farmsharing.model.domain.Image;
-import com.boyu.farmsharing.model.request.ImageRandomRequest;
+import com.boyu.farmsharing.model.request.Image.ImageRandomRequest;
 import com.boyu.farmsharing.service.ImageService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

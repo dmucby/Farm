@@ -4,10 +4,13 @@ package com.boyu.farmsharing.Controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.boyu.farmsharing.common.BaseResponse;
 import com.boyu.farmsharing.common.ResultUtils;
+import com.boyu.farmsharing.mapper.FarmPostMapper;
 import com.boyu.farmsharing.model.domain.Farmpost;
-import com.boyu.farmsharing.model.request.UserPostGetList;
-import com.boyu.farmsharing.model.request.UserPostGetRequest;
-import com.boyu.farmsharing.model.request.UserPostRequest;
+import com.boyu.farmsharing.model.request.FarmPost.UserOwnerPostGetList;
+import com.boyu.farmsharing.model.request.FarmPost.UserPostGetList;
+import com.boyu.farmsharing.model.request.FarmPost.UserPostGetRequest;
+import com.boyu.farmsharing.model.request.FarmPost.UserPostRequest;
+import com.boyu.farmsharing.model.request.User.UserSearchRequest;
 import com.boyu.farmsharing.service.FarmpostService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +32,9 @@ public class PostController {
     @Resource
     FarmpostService farmpostService;
 
+    @Resource
+    FarmPostMapper farmPostMapper;
+
     /**
      * 发布帖子
      * @param userPostRequest 帖子参数
@@ -44,13 +50,14 @@ public class PostController {
         String postContent = userPostRequest.getPostContent();
         String userName = userPostRequest.getUserName();
         String postPicture = userPostRequest.getPostPicture();
+        String openId = userPostRequest.getOpenId();
 
-        if(StringUtils.isAnyBlank(postTitle,postContent,userName)){
+        if(StringUtils.isAnyBlank(postTitle,postContent,userName,openId)){
             return ResultUtils.error(PARAMS_ERROR,"参数为空！");
         }
 
-        if(!farmpostService.userPost(postTitle,postContent,userName,postPicture)){
-            return ResultUtils.error(PARAMS_ERROR, "参数为空！");
+        if(!farmpostService.userPost(postTitle,postContent,userName,postPicture,openId)){
+            return ResultUtils.error(PARAMS_ERROR, "参树不合法！");
         }
 
         return ResultUtils.success("Post Success!");
@@ -78,32 +85,11 @@ public class PostController {
     }
 
     /**
-     * 获取最新帖子
-     * @return 最新的10篇帖子
+     * 按序获取帖子
+     * @param request 请求参数
+     * @return 请求结果
      */
-    @PostMapping("read")
-    public BaseResponse userGetList(){
-         QueryWrapper wrapper = new QueryWrapper();
-         wrapper.orderByDesc("CreateDate");
-         wrapper.last("limit 10");
-         List<Farmpost> farmpostList = farmpostService.list(wrapper);
-         return ResultUtils.success(farmpostList);
-    }
-
-    /**
-     * 获取点赞最多的帖子
-     * @return 10篇点赞最多的帖子
-     */
-    @PostMapping("love")
-    public BaseResponse userGetListLove(){
-        QueryWrapper wrapper = new QueryWrapper();
-        wrapper.orderByDesc("PostLove");
-        wrapper.last("limit 30");
-        List<Farmpost> farmpostList = farmpostService.list(wrapper);
-        return ResultUtils.success(farmpostList);
-    }
-
-    @PostMapping("order")
+    @PostMapping("/postorder")
     public BaseResponse userGetPostList(@RequestBody UserPostGetList request ){
         if (request == null){
             return ResultUtils.error(PARAMS_ERROR, "参数为空！");
@@ -122,6 +108,59 @@ public class PostController {
         }
 
         List<Farmpost> list = farmpostService.postPage(pageNumber,pageNums,matchField);
+
+        return ResultUtils.success(list);
+    }
+
+    /**
+     * 模糊匹配查找
+     * @param request 请求参数
+     * @return 请求结果
+     */
+    @PostMapping("/search")
+    public BaseResponse userPostSearch(@RequestBody UserSearchRequest request){
+        if (request == null){
+            return ResultUtils.error(PARAMS_ERROR, "参数为空！");
+        }
+
+        String searchPostTitle = request.getSearchPostTitles();
+
+        if (StringUtils.isEmpty(searchPostTitle)) {
+            return ResultUtils.error(PARAMS_ERROR, "请正确书写请求参数");
+        }
+
+        QueryWrapper<Farmpost> wrapper = new QueryWrapper<>();
+
+        wrapper.like("PostTitle",searchPostTitle);
+        wrapper.last("limit 10");
+
+        return ResultUtils.success(farmPostMapper.selectList(wrapper));
+    }
+
+    /**
+     * 按序获取用户帖子
+     * @param request 请求参数
+     * @return 请求结果
+     */
+    @PostMapping("/post")
+    public BaseResponse userOwnerGetPostList(@RequestBody UserOwnerPostGetList request ){
+        if (request == null){
+            return ResultUtils.error(PARAMS_ERROR, "参数为空！");
+        }
+
+        Integer pageNumber = request.getPageNumber();
+        Integer pageNums = request.getPageNums();
+        String openId = request.getOpenId();
+
+        if(pageNumber == 0 || pageNums == 0){
+            return ResultUtils.error(PARAMS_ERROR, "请正确书写请求参数");
+        }
+
+        if(StringUtils.isAnyBlank(openId)){
+            return ResultUtils.error(PARAMS_ERROR, "请正确书写请求参数");
+        }
+
+        List<Farmpost> list = farmpostService.postPage(pageNumber,pageNums,openId);
 
         return ResultUtils.success(list);
     }

@@ -49,8 +49,8 @@ public class Farmpost implements Serializable {
     /**
      * 用户ID
      */
-    @TableField(value = "UserID")
-    private Integer userID;
+    @TableField(value = "openId")
+    private String openId;
 
     /**
      * 用户名

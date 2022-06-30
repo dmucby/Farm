@@ -18,7 +18,7 @@ public interface FarmpostService extends IService<Farmpost> {
      * @param postContent 文章内容
      * @param userName 文章作者
      */
-    Boolean userPost(String postTitle,String postContent,String userName,String postPicture);
+    Boolean userPost(String postTitle,String postContent,String userName,String postPicture,String openId);
 
     /**
      * 分页返回
@@ -26,4 +26,12 @@ public interface FarmpostService extends IService<Farmpost> {
      * @param pageNums 页面内容个数
      */
     List<Farmpost> postPage(Integer pageNumber, Integer pageNums,String matchField);
+
+    /**
+     * 分页返回
+     * @param pageNumber 页码
+     * @param pageNums 页面内容个数
+     */
+    List<Farmpost> userPostPage(Integer pageNumber, Integer pageNums,String openId);
+
 }

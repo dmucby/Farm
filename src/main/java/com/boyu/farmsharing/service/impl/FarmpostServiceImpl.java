@@ -32,7 +32,7 @@ public class FarmpostServiceImpl extends ServiceImpl<FarmPostMapper, Farmpost>
     FarmPostMapper mapper;
 
     @Override
-    public Boolean userPost(String postTitle, String postContent, String userName,String postPicture ) {
+    public Boolean userPost(String postTitle, String postContent, String userName,String postPicture ,String openId) {
         /**
          * 1.校验
          */
@@ -50,15 +50,16 @@ public class FarmpostServiceImpl extends ServiceImpl<FarmPostMapper, Farmpost>
 
         farmpost.setPostPicture(postPicture);
 
-        farmpost.setUserID(UUID.randomUUID().variant());
+        farmpost.setOpenId(openId);
         farmpost.setCreateDate(new Date());
 
         Random random = new Random();
-        farmpost.setPostLove(random.nextInt(300));
-        farmpost.setPostReading(random.nextInt(500));
+        farmpost.setPostLove(random.nextInt(3000));
+        farmpost.setPostReading(random.nextInt(5000));
 
         return this.save(farmpost);
     }
+
 
     @Override
     public List<Farmpost> postPage(Integer pageNumber, Integer pageNums,String matchField) {
@@ -73,6 +74,21 @@ public class FarmpostServiceImpl extends ServiceImpl<FarmPostMapper, Farmpost>
         List<Farmpost> list = page.getRecords();
         return list;
     }
+
+    @Override
+    public List<Farmpost> userPostPage(Integer pageNumber, Integer pageNums,String openId) {
+        QueryWrapper<Farmpost> wrapper = new QueryWrapper<>();
+
+        wrapper.eq("openId",openId);
+
+        Page<Farmpost> page = new Page<>(pageNumber,pageNums,false);
+
+        mapper.selectPage(page,wrapper);
+
+        List<Farmpost> list = page.getRecords();
+        return list;
+    }
+
 }
 
 
